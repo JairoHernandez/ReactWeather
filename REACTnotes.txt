@@ -406,3 +406,57 @@ this.props.children can now be this
 				</div>
 			);
 		};
+
+-------------Joining Github and Generating SSH Keys-------------
+
+jairomh@DEV2:~/REACT/ReactWeather$ ls -al ~/.ssh
+ls: cannot access '/home/jairomh/.ssh': No such file or directory
+jairomh@DEV2:~/REACT/ReactWeather$ mkdir ~/.ssh
+jairomh@DEV2:~/REACT/ReactWeather$ chmod 700 ~/.ssh
+jairomh@DEV2:~/REACT/ReactWeather$ ssh-keygen -t rsa -b 4096 -C 'jairomh@hotmail.com'
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/jairomh/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/jairomh/.ssh/id_rsa.
+Your public key has been saved in /home/jairomh/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:pDsC6dUSa5hF5UYo6P1lKiEKNoeLvVfl6Kq/9tJntAc jairomh@hotmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+| .  .oo          |
+|. ...o           |
+|. o.o o .        |
+|.* O = =.        |
+|=.X B *+S        |
+|oo.= +o.E        |
+|  ..o+o. o       |
+|  . +.o.+ .      |
+|  .=+=.o .       |
++----[SHA256]-----+
+
+Check that the process is running.
+
+jairomh@DEV2:~/REACT/ReactWeather$ eval "$(ssh-agent -s)"
+Agent pid 6688
+
+jairomh@DEV2:~/REACT/ReactWeather$ ssh-add ~/.ssh/id_rsa
+Identity added: /home/jairomh/.ssh/id_rsa (/home/jairomh/.ssh/id_rsa)
+
+Create ssh key on github using these contents
+jairomh@DEV2:~/REACT/ReactWeather$ cat ~/.ssh/id_rsa.pub 
+
+jairomh@DEV2:~/REACT/ReactWeather$ ssh -T git@github.com
+The authenticity of host 'github.com (192.30.253.113)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+Hi JairoHernandez! You've successfully authenticated, but GitHub does not provide shell access.
+
+-------------Pushing to GitHub-------------
+
+jairomh@DEV2:~/REACT/ReactWeather$ git remote add origin https://github.com/JairoHernandez/ReactWeather.git
+jairomh@DEV2:~/REACT/ReactWeather$ git remote -v
+origin	https://github.com/JairoHernandez/ReactWeather.git (fetch)
+origin	https://github.com/JairoHernandez/ReactWeather.git (push)
+
