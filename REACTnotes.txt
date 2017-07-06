@@ -456,6 +456,7 @@ Hi JairoHernandez! You've successfully authenticated, but GitHub does not provid
 -------------Pushing to GitHub-------------
 
 jairomh@DEV2:~/REACT/ReactWeather$ git remote add origin https://github.com/JairoHernandez/ReactWeather.git
+jairomh@DEV2:~/REACT/ReactWeather$ git push origin master (or eventually git push heroku master)
 jairomh@DEV2:~/REACT/ReactWeather$ git remote -v
 origin	https://github.com/JairoHernandez/ReactWeather.git (fetch)
 origin	https://github.com/JairoHernandez/ReactWeather.git (push)
