@@ -459,4 +459,14 @@ jairomh@DEV2:~/REACT/ReactWeather$ git remote add origin https://github.com/Jair
 jairomh@DEV2:~/REACT/ReactWeather$ git remote -v
 origin	https://github.com/JairoHernandez/ReactWeather.git (fetch)
 origin	https://github.com/JairoHernandez/ReactWeather.git (push)
+jairomh@DEV2:~/REACT/ReactWeather$ git branch
+* master
 
+-------------Heroku Singup and Toolbelt-------------
+
+Just download it from the heroku website. Depending on OS you might have to install
+via cli or download install click package.
+
+~/REACT/ReactWeather$ sudo snap install heroku
+or
+~/REACT/ReactWeather$ npm install -g heroku-cli
