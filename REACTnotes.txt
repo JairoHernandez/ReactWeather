@@ -1,0 +1,408 @@
+test clone
+test 2
+
+'npm install express@4 express --save' (will create node_mofules folder and adds entry in dependencies section)
+'npm install by' itself installs dependencies based on what package.json says, which also re-installs node_modules folder.
+
+
+-------------Hello React - Hello React!-------------
+
+<script type="text/javascript" scrc="https://cdnjs.cloudflare.com/ajax/libs/0.14.7/react.js"></script>
+<script type="text/javascript" scrc="https://cdnjs.cloudflare.com/ajax/libs/0.14.7/react-dom.js"></script>
+
+	react.js is for native IOS and Android.
+	react-dom.js is for the WEB.
+
+	We will eventually upgrade from script tags to webpack in later sections.
+
+Babel provides supports your ES6 code and compiles it to older ES5 code so older browsers can run it.
+To convert JSX into JS or convert ES6 code into ES5 include babel script tag.
+	
+	<head>
+		<script type="text/javascript" scrc="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	<body>
+		<script type="text/babel"></script>
+	
+-------------Your First React Component!-------------
+
+React component naming convention. 
+	- 1st letter is always capitalized.
+
+React.createClass always takes in an object and always requires render.
+
+	var GreeterWord = React.createClass({
+		render: function() {
+			return (
+				// THIS IS JSX
+				<div> // root <div>
+					<h1>Hello render react!!!</h1>
+					<p>This is from the component.</p>
+				</div>
+			);
+		}
+	});
+
+	NOTE!! when returning your JSX you have to only return one root element in our example it is the root <div>
+
+-------------Learning JSX-------------
+https://babeljs.io.repl
+
+-------------Component properties-------------
+'props' is short for properties and it's a way to pass in data into your component when you first start it.
+
+Here we are initializing the Greeter component but not passing data.
+
+	ReactDOM.render(
+		<Greeter />, document.getElementById('app')
+	);
+
+Do this to pass data via a 'name' property.
+
+	var Greeter = React.createClass({
+
+		getDefaultProps: function() {
+			return {
+				name: 'React', // This is a prop accessed by this.props.
+				message: 'This is React message.'
+			};
+		},
+
+		render: function() {
+
+			var name = this.props.name; 
+			var message = this.props.message;
+
+			return (
+				<div>
+					<h1>Hello {name}!!</h1> 
+					<p>{message + '!!'}</p> // You can concatenate text inside JSX expression.
+				</div>
+			);
+		}
+	});
+
+	// You can also pass in variable values just like componet properties. 
+	// This means any type is availabe when working with props.
+	var firstName = 'Jairo'
+
+	ReactDOM.render(
+		<Greeter name={firstName} message='This is prop message.' />, document.getElementById('app')
+	);
+
+-------------User Events and Callbacks-------------
+
+'onSubmit' is an  attribute built into React.
+It captures everytime a form is submitted and we can pass it a JS expression.
+'ref' ia another React builin attribute	
+
+	onButtonClick: function(e) { 
+		e.preventDefault(); // Prevents form from causing full browser refresh when its submitted. This is the goal of React for SPAs.
+		var name= this.refs.name.value; // tied to ref field from from.
+		alert(name);
+	},
+	.....
+	<form onSubmit={this.onButtonClick}>
+		<input type="text" ref="name"/>
+		<button>Set Name</button>
+	</form>
+
+-------------Component State-------------
+
+There are two types of data in a component:	props and state.
+	
+	- props get passed into a component as you initialize it, the prop is 'name'.
+		
+		<Greeter name={firstName}
+	
+	- state is internally maintained and updated by the component. 
+	It should not update its own props, but it is allowed to update its own state.
+	
+	Always answer this:  IS MY COMPONENT GOING TO BE UPDATING THE VALUE?
+	To know if I need to use state.
+
+-------------Nested Components: Part 1 & 2-------------
+
+A component cannot update its prop but it can update its state.
+
+It's best to make a static component first, meaning no props or state are being used or passed in.
+
+Presentational component renders something visible to the screen like "Hello Andrew".
+They do not maintain state are kind of like dummy components.
+
+The Container component(in red aka parent) do maintain state. 
+Red component maintains 'name' state and when changed by blue component it will re-render green component.
+It automatically re-renders its children when state changes.
+
+<GreeterForm onNewName={this.handleNewName}/> // the attribute for the child start with 'on' and for the parent it starts with 'handle'.
+
+Only updates the green component because the blue component does not care about the state of its parent.
+Whenever you changed state it re-renders.
+
+-------------QUIZ 1-------------
+
+What are React props used for? Initializing a component with data.
+What is React state used for? Keeping track of data that changes in a component.
+What is a presentational component? A component that uses props to display information.
+What is a container component? A component that maintains state & renders child components.
+How would you set a components "name" state to "John"? this.setState({name: 'John'}).
+
+-------------What is Webpack?(And installing it.)-------------
+
+WEbpack bundles all of our 3rd party dependencies like babel, react, and reactdom along with app code.
+Let's us break components into separate files sort like 'require' in node.
+
+~/REACT/HelloReact$ npm install -g webpack@1.12.13
+jairomh@ubuntu64-DevOps:~/REACT/HelloReact$ webpack -h
+webpack 1.12.13
+Usage: https://webpack.github.io/docs/cli.html
+
+Options:
+  --help, -h, -?                                                                                  
+  --config                                                                                        
+  --context    
+
+~/REACT/HelloReact$ npm install -save react@0.14.7 react-dom@0.14.7
+
+Install local dependencies for dev purposes only and not for production.
+        
+~/REACT/HelloReact$ npm install --save-dev webpack@1.12.13 babel-core@6.5.1 babel-loader@6.2.2 babel-preset-es2015@6.5.0 babel-preset-react@6.5.0
+
+~/REACT/HelloReact$ webpack ./public/app.js ./public/bundle.js
+Hash: ccbca6cc6c5a756e0b3e
+Version: webpack 1.12.13
+Time: 71ms
+    Asset     Size  Chunks             Chunk Names
+bundle.js  1.47 kB       0  [emitted]  main
+   [0] ./public/app.js 79 bytes {0} [built]
+
+-------------What is Webpack?(And installing it.)-------------
+
+webpack.config.js is a very important file that exports an object to let you configure what webpack does.
+By adding this in there all you need do is run webpback command without supplying filenames.
+
+	module.exports = {
+		entry: './public/app.js',
+		output: {
+			path: __dirname,
+			filename: './public/bundle.js'
+		},
+		resolve: {
+			extensions: ['', '.js', '.jsx']
+		}
+	};
+
+
+	~/REACT/HelloReact$ webpack
+	Hash: 7f675e0aa18af882cb64
+	Version: webpack 1.12.13
+	Time: 78ms
+				Asset     Size  Chunks             Chunk Names
+	./public/bundle.js  1.62 kB       0  [emitted]  main
+	[0] ./public/app.js 59 bytes {0} [built]
+		+ 1 hidden modules <<< 	WHERE THAT FILE IS Greeter.js
+
+After removing the script tags 'React' is not available in app.jsx. When using webpack every file is treated as its own island.
+It's not available globally and needs to be imported explicitly.
+
+	var React = require('react');
+	var ReactDOM = require('react-dom');
+
+	Run webpack again and you see that there are a lot more dependencies this time.
+
+	~/REACT/HelloReact$ webpack 
+	Hash: 84fd7d74053b8bd7605e
+	Version: webpack 1.15.0
+	Time: 2201ms
+				Asset    Size  Chunks             Chunk Names
+	./public/bundle.js  683 kB       0  [emitted]  main
+		+ 159 hidden modules
+
+-------------Webpack: Custom package names-------------
+
+Remove the ./ and path to your jsx file.
+
+	var GreeterForm = require('./GreeterForm');
+to this
+	var GreeterForm = require('GreeterForm');
+which allows you to re-use the same entry in any other jsx file and if you move the jsx file 
+just update it one place in webpack.config.js below.
+
+	resolve: {
+		root: __dirname,
+			alias: {
+				Greeter: 'public/components/Greeter.jsx',
+				GreeterMessage: 'public/components/GreeterMessage.jsx',
+				GreeterForm: 'public/components/GreeterForm.jsx'
+			}
+
+One more tip is this webpack equivalent to nodemon.
+~/REACT/HelloReact$ webpack -w
+Hash: 82eae04f3588c571f6f2
+Version: webpack 1.12.13
+Time: 2724ms
+             Asset    Size  Chunks             Chunk Names
+./public/bundle.js  683 kB       0  [emitted]  main
+    + 162 hidden modules
+
+-------------Boilerplate project-------------
+
+Copy all contents of HelloReact folder to make a new folder called ReactBoilerplate.
+Remove all alias entries from its array in webpack.config.js.
+
+	Greeter: 'public/components/Greeter.jsx',
+	GreeterMessage: 'public/components/GreeterMessage.jsx',
+	GreeterForm: 'public/components/GreeterForm.jsx'
+
+Create folder ReactBoilerplate/app and move folder 'components' and 'app.jsx' into it.
+This is where we are going to store all our raw files. In this case our jsx files before they get passed thru bundler.
+
+Change entry: './public/app.jsx', to entry: './app/app.jsx',
+Keep this the same filename: './public/bundle.js' becaue the bundle file is used by the browser inside index.html, which live in the same folder.
+
+package.json
+	Change "name": "hello-react" to "name": "boilerplate". Try to use lowercase letters with no spaces to avoid future errors.
+
+Remove this from app.jsx since not needed in a boilerplate.
+
+	var Greeter = require('./components/Greeter');
+
+	// You can also pass in variable values just like componet properties. 
+	// This means any type is availabe when working with props.
+	var firstName = 'Odie'
+
+-------------Bonus: Using Experimental Javascript Features-------------
+
+For this experimentla ES6 feature ...objOne to work you need to install stage-0 webpack plugin.
+
+	~/REACT/ReactBoilerplate$ npm install babel-preset-stage-0 --save-dev
+
+	app.jsx
+		var objOne = { 	name: 'Jairo', 	location: 'Mansfield' };
+		var objTwo = { age: 37, ...objOne };
+
+	and it needs to be added in	webpack.config.js
+		
+		presets: ['react', 'es2015', 'stage-0']
+
+-------------Adding React Router-------------
+
+~/REACT/ReactWeather$ npm install react-router@2.0.0 --save
+
+// If you forget module.exports you will get 'Error: The root route must render a single element'
+module.exports = Main; 
+
+Create Nav component and render inside of the Main component.
+History hash is used to track pages with '#/[urlname]' in URL.
+	app.jsx
+		<Router history={hashHistory}>
+
+In browser this 'k' info is used by react router to keep track of state of application between route changes.
+	http://localhost:3000/#/?_k=rupgln
+
+	The '/' URL after '#' is used by this 
+	app.jsx
+		<Route path="/" component={Main}>
+
+-------------Creating our pages-------------
+
+'/' renders {Weather} while '/about' renders {About}
+	
+	<Route path="/" component={Main}>
+		<Route path="about" component={About}/> 
+		<IndexRoute component={Weather}/>
+	</Route>		
+
+	The about component is found via this URL
+		http://localhost:3000/#/about?_k=18lqiu
+
+-------------Exploring OpenWeathermap.org-------------
+
+http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b1b15e88fa797225412429c1c50c122a1
+http://samples.openweathermap.org/data/2.5/find?q=London&units=imperial&appid=b1b15e88fa797225412429c1c50c122a1
+http://samples.openweathermap.org/data/2.5/find?q=London&units=imperial
+
+my key 7960c1b1b4718b05110e495c2f37e1ac
+
+-------------ES6 promisses GREAT TUTORIAL-------------
+
+-------------Faking Our Call GREAT PRESENTATIONAL AND STATE FLOW-------------
+
+handleSearch and onSearch are both naming conventions.
+getInitialState is built into react.
+
+this.state and this.props are both objects
+	
+	Weather.jsx
+		var {temp, location} = this.props;
+	WeatherMessage.jsx
+		var {location, temp} = this.state; 
+
+-------------Making Our API Call-------------
+
+-------------Debugging and the React Router-------------
+
+-------------Google Chrome 'React Developer Tools-------------
+-------------Advanced Debugging-------------
+Due to a library bug there is a small issue in the next video. 
+In the next lecture you'll learn how to setup source maps by setting a "devtool" property in webpack.config.js. 
+In the lecture I set the value to "cheap-module-eval-source-map". This might cause the source maps to not work as shown in the video.
+If you are getting this error, try setting the value to either "inline-source-map" or "eval-source-map" instead.
+
+Pause execution of code. This is where real debugging happens.
+	debugger;
+
+sourcemaps let's you debug the code you actually wrote instead of having to look at that big transformed bundle.js file.
+Add this to webpack.config.js
+	devtool: 'cheap-module-eval-source-map'.
+
+Cool you dont even need to use console.log in the console. Just type in the variable name.
+
+-------------ES6 Asside: Arrow Functions-------------
+
+Anonymous functions have a 'this' binding.
+Arrow functions take on their parent's 'this' binding.
+
+-------------Refactoring: Stateless Functional Components-------------
+
+Brand new feature in 0.14 of React.
+Presentational components dont carry state so you can swap out React.createClass that only carry a 
+'render' key  with an anonymous function(or arrow function).
+These two functions are equivalent:
+	About.jsx
+		// var About = React.createClass({
+		//     render: function() {
+		//         return (
+		//             <h3>About Component</h3>
+		//         );
+		//     }
+		// });
+
+		var About = (props) => {
+			return (
+				<h3>About Component</h3>
+			);
+		}
+
+this.props.children can now be this
+	Main.jsx
+		// var Main = React.createClass({
+		//     render: function() {
+		//         return (
+		//             <div>
+		//                 <Nav/>
+		//                 <h1>Main Component</h1>
+		//                 {this.props.children}
+		//             </div>
+		//         );
+		//     }
+		// });
+
+		var Main = (props) => {
+			return (
+				<div>
+					<Nav/>
+					<h1>Main Component</h1>
+					{props.children}
+				</div>
+			);
+		};

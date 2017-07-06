@@ -1,0 +1,25 @@
+var React = require('react');
+
+// var WeatherMessage = React.createClass({
+//     render: function() {
+
+//         var {temp, location} = this.props;
+
+//         return (
+//             <h3>It is {temp} in {location}.</h3>
+//         );
+//     }
+// });
+
+// var WeatherMessage = (props) => {
+
+//     var {temp, location} = props;
+// With ES6 destructuring you replace props like this.
+var WeatherMessage = ({temp, location}) => {
+
+    return (
+        <h3>It is {temp} in {location}.</h3>
+    );   
+};
+
+module.exports = WeatherMessage;
