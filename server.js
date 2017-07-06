@@ -2,16 +2,19 @@ var express = require('express');
 
 // Create our app
 var app = express();
-const PORT = process.eventNames.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(function(req, res, next) {
 	if (req.headers['x-forwarded-proto'] === 'http') {
+		// console.log('test1');
 		next();
 	} else {
+		// console.log('test2');
 		res.redirect('http://' + req.hostname + req.url);
 	}
 });
 
+// console.log('test 3');
 app.use(express.static('public'));
 
 // port 3000
