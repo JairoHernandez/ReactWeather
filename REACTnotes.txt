@@ -492,6 +492,8 @@ Link to existing Heroku app.
 
 
 -------------Installing foundation-------------
+-------------Styling Examples Page-------------
+
 
 $ npm install css-loader@0.23.1 script-loader@0.6.1 style-loader@0.13.0 jquery@2.2.1 foundation-sites@6.2.0 --save-dev
 $ npm install foundation-sites@6.2.0 --save-exact --save-dev
@@ -501,7 +503,5 @@ which is 6/12=50%. And since it's small this will also apply to medium/large col
 too since Founction is mobile first.
 
 small = small-12
-
--------------Styling Examples Page-------------
-
-4:53
+It's to use plain small to take up all 12 colums on small screen sizes. 
+That way it uses the whole screen to display as much as possible.
