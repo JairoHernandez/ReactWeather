@@ -505,3 +505,6 @@ too since Founction is mobile first.
 small = small-12
 It's to use plain small to take up all 12 colums on small screen sizes. 
 That way it uses the whole screen to display as much as possible.
+
+About page
+2:32
