@@ -506,5 +506,15 @@ small = small-12
 It's to use plain small to take up all 12 colums on small screen sizes. 
 That way it uses the whole screen to display as much as possible.
 
-About page
-2:32
+-------------Adding a Modal for Errors part 1-------------
+
+data-reveal let's Foundation know we are dealing with a modal.
+	<div id="error-modal" className="reveal tiny text-center" data-reveal>
+
+data-close will close the modal
+	<button className="button hollow" data-close>Okay</button>
+
+Component Lifecycle
+	facebook.github.io/react
+
+	Is where you can find render, getInitialState, getDefaultProps methods

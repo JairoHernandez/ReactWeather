@@ -14,7 +14,7 @@ var Nav = require('Nav');
 // });
 
 var Main = (props) => {
-    debugger;
+    //debugger;
     return (
         <div>
             <Nav/>
