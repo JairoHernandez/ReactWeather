@@ -518,3 +518,31 @@ Component Lifecycle
 	facebook.github.io/react
 
 	Is where you can find render, getInitialState, getDefaultProps methods
+
+-------------Adding a Modal for Errors part 2-------------
+
+Goal: Error message properly passed down from parent to child
+
+	Parent is Weather.jsx.
+	Child is ErrorModal component.
+
+	If you get this error then it means you have newer version of Axios that has changed
+	how errors are handled.
+
+		Error
+		Cannot read property 'message' of undefined
+
+REVIEW OF video
+	componentDidMount is automatically called by React after the component gets updated
+	with what's in you render function. Reason for componentDidMount is to open the modal
+	when ErrorModal component gets rendered.
+
+	propTypes lets us setup props and their types.
+
+	propTypes: {
+        title: React.PropTypes.string,
+        message: React.PropTypes.string.isRequired
+    },
+    componentDidMount: function() {
+        var modal = new Foundation.Reveal($('#error-modal'));
+        modal.open();
