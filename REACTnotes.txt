@@ -463,6 +463,8 @@ origin	https://github.com/JairoHernandez/ReactWeather.git (push)
 jairomh@DEV2:~/REACT/ReactWeather$ git branch
 * master
 
+$heroku open
+
 -------------Heroku Singup and Toolbelt-------------
 
 Just download it from the heroku website. Depending on OS you might have to install
