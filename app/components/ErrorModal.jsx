@@ -10,7 +10,7 @@ var ErrorModal = React.createClass({
         title: React.PropTypes.string,
         message: React.PropTypes.string.isRequired
     },
-    componentDidMount: function() {
+    componentDidMount: function() { // These methods are called when an instance of a component is being created and inserted into the DOM.
         var modal = new Foundation.Reveal($('#error-modal'));
         modal.open();
     },
