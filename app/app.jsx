@@ -6,6 +6,7 @@ var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 // or
 // var {name} = obj; is same as var name = obj.name;
 var Main = require('Main');
+// The children go under Route path="/"
 var Weather = require('Weather');
 var About = require('About');
 var Examples = require('Examples');
