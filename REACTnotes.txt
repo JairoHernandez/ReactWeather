@@ -553,3 +553,18 @@ Weather.jsx
 	return <h3 className="text-center page-title">Fetching weather....</h3>;
 
 Add this to webpack.config so it can recompile CSS everytime we change styles/app.css
+
+-------------Setting up SCSS-------------
+
+sass-lang.com
+
+Install sas loader and nodesas
+	nodesas converts scss files to normal css.
+
+	$ npm install sass-loader@3.1.2 node-sass@3.4.2 --save-dev
+
+	You have to change extention of app.css to app.scss.
+	And also updata extension in webpack.config.
+
+	Also in app.jsx one needs to change	require('style!css!applicationStyles')
+	to require('style!css!sass!applicationStyles')
