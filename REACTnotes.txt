@@ -568,3 +568,22 @@ Install sas loader and nodesas
 
 	Also in app.jsx one needs to change	require('style!css!applicationStyles')
 	to require('style!css!sass!applicationStyles')
+
+-------------Linking To Location And Wiring Up Nav Form-------------
+
+Weather.jsx
+	componentDidMount: function() {} fires when component is mounted into the browser.
+	Reset the query string after searching weather.
+
+ 	// will remove query string in browser after weather has been successfully searched.
+    // which will prevent loading the same temperature/city at browser refresh.
+	window.location.hash = '#/'; 
+
+%20 is encoded version of a space.
+
+HUGE TIP!!
+	prop - component cannot change it, but a parent can always update a child's prop. For example React router will update the 
+	state - component can change it.
+
+// Makes 'Get Weather' page display temp/city when you top right corner search.
+    componentWillReceiveProps: function(newProps) {

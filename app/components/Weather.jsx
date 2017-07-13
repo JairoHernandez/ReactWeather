@@ -15,7 +15,9 @@ var Weather = React.createClass({
         var that = this;
         this.setState({
             isLoading: true, 
-            errorMessage: undefined // clear previous errors at page loading
+            errorMessage: undefined, // clear previous errors at page loading
+            location: undefined,  // good to clear data to avoid data lingering
+            temp: undefined // around which could cause unexpected results
         });
 
         openWeatherMap.getTemp(location).then(function(temp) {
@@ -37,6 +39,31 @@ var Weather = React.createClass({
         //     temp: 23
         // });
     },
+    componentDidMount: function() {
+        // http://localhost:3000/#/?location=Austin&_k=93bb42 we are pulling out query 'location'.
+        var location = this.props.location.query.location;
+
+        if  (location && location.length > 0) {
+            this.handleSearch(location);
+            // will remove query string in browser after weather has been successfully searched.
+            // which will prevent loading the same temperature/city at browser refresh.
+            window.location.hash = '#/'; 
+        }
+    },
+
+    // Makes 'Get Weather' page display temp/city when you top right corner search.
+    componentWillReceiveProps: function(newProps) {
+        // http://localhost:3000/#/?location=Austin&_k=93bb42 we are pulling out query 'location'.
+        var location = newProps.location.query.location;
+
+        if  (location && location.length > 0) {
+            this.handleSearch(location);
+            // will remove query string in browser after weather has been successfully searched.
+            // which will prevent loading the same temperature/city at browser refresh.
+            window.location.hash = '#/'; 
+        } 
+    },
+
     render: function() {
 
         var {isLoading, temp, location, errorMessage} = this.state; // access those in handleSearch
