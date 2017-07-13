@@ -463,8 +463,6 @@ origin	https://github.com/JairoHernandez/ReactWeather.git (push)
 jairomh@DEV2:~/REACT/ReactWeather$ git branch
 * master
 
-$heroku open
-
 -------------Heroku Singup and Toolbelt-------------
 
 Just download it from the heroku website. Depending on OS you might have to install
@@ -548,3 +546,10 @@ REVIEW OF video
     componentDidMount: function() {
         var modal = new Foundation.Reveal($('#error-modal'));
         modal.open();
+
+-------------Adding Custom CSS-------------
+
+Weather.jsx
+	return <h3 className="text-center page-title">Fetching weather....</h3>;
+
+Add this to webpack.config so it can recompile CSS everytime we change styles/app.css
