@@ -12,14 +12,18 @@ module.exports = {
         return axios.get(requestUrl).then(function(res) {
             //debugger;
             if (res.data.cod && res.data.message) {
+                console.log('test1');
                 throw new Error(res.data.message);
             } else {
+                //console.log('jario');
+                console.log(res.data);
                 return res.data.main.temp;
             }
-        // older Axios way         
-        // }, function(res) {
-        //     throw new Error(res.data.message);
+            // older Axios way         
+            // }, function(res) {
+            //     throw new Error(res.data.message);
         }, function(err) {
+            console.log('test2');
             throw new Error('Unable to fetch weather for that location');
         });
 
